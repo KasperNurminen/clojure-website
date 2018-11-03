@@ -1,0 +1,114 @@
+body{
+  font-family: 'Lato', sans-serif;
+  margin: 0;
+}
+p{
+ font-size: 1.25rem;
+ }
+li{
+  font-size: 1.25rem;
+  margin-top: 0.75rem;
+}
+.header{
+  display:flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  padding: 0;
+  height: 70px;
+  justify-content: space-between;
+}
+.main-title{
+  margin-top: -2rem;
+
+ color: white;
+ font-size: 2rem;
+}
+.main-image{
+  height: 100vh;
+  width: 100vw;
+  background-attachment: fixed;
+  margin-top: 0px;
+  display: flex;
+  justify-content: center;
+   align-items: center;
+   background-size: cover;
+   background-image: url("../assets/people-kasper-large@2x.jpg");
+}
+#about{
+     width: 100vw;
+     height: 100vh;
+     //background-color: rgb(247, 247, 247);;
+     margin: 0;
+     padding: 0;
+}
+#main{
+   padding: 4rem 10px;
+     margin: 0rem 2rem;
+
+}
+#main-left{
+ display: flex;
+  //justify-content: center;
+  flex-direction: column;
+   align-items: center;
+}
+#main-right{
+}
+#face{
+   padding: 0rem;
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+   width: 250px;
+   justify-content: center;
+}
+h2, h3{
+  font-weight: 300;
+  font-size: 1.75rem;
+  line-height: 1.5rem;
+}
+.avatar{
+  border-radius: 100px;
+  width: 200px;
+  height: 200px;
+}
+.title{
+  margin-top: 1rem;
+}
+.education{
+ font-size: 1rem;
+ margin: 0.3rem;
+}
+.uni{
+ font-size: 0.8rem;
+ color: rgba(0,0,0,0.6);
+}
+
+.ml-2{
+ margin-left: 2rem;
+}
+.contact-icon{
+  margin: -6px;
+ }
+.contact-icon:hover{
+padding: 0;
+  transform: scale(1.5);
+}
+
+.mr-2{
+ margin-right: 2rem;
+}
+@media only screen and (min-width: 1080px) {
+    #main {
+        display: flex;
+    }
+    #face{
+        padding: 3rem 4rem;
+    }
+    .col-2{
+       display: flex;
+    }
+}
