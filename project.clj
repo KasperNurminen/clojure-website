@@ -31,7 +31,8 @@
   {:builds
    [{:id           "dev"
      :source-paths ["src/cljs"]
-     :figwheel     {:on-jsload "clojure-cv.core/mount-root"}
+     :figwheel     {:on-jsload "clojure-cv.core/mount-root" ;:websocket-host ~(.getHostAddress (java.net.Inet4Address/getLocalHost))
+                    }
      :compiler     {:main                 clojure-cv.core
                     :output-to            "resources/public/js/compiled/app.js"
                     :output-dir           "resources/public/js/compiled/out"
@@ -39,7 +40,7 @@
                     :source-map-timestamp true
                     :preloads             [devtools.preload
                                            day8.re-frame-10x.preload]
-                    :closure-defines      {"re_frame.trace.trace_enabled_QMARK_" true
+                    :closure-defines      {"re_frame.trace.trace_enabled_QMARK_"        true
                                            "day8.re_frame.tracing.trace_enabled_QMARK_" true}
                     :external-config      {:devtools/config {:features-to-install :all}}
                     }}
@@ -51,7 +52,6 @@
                     :optimizations   :advanced
                     :closure-defines {goog.DEBUG false}
                     :pretty-print    false}}
-
 
     ]}
   )
