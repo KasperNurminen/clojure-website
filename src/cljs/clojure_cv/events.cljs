@@ -16,6 +16,11 @@
 (re/reg-event-db :set-current-section
   (fn [db [_ val]]
     (assoc db :current-section val)))
+
+(re/reg-event-db :scroll-is-at-beginning
+  (fn [db [_ val]]
+    (assoc db :scroll-is-at-beginning val)))
+
 (re/reg-event-db :toggle-menu
   (fn [db _]
     (let [menu-state (get db :menu-open)]
@@ -32,3 +37,6 @@
 (re/reg-sub :modal-open #(get %1 :modal-open))
 (re/reg-sub :current-section #(get %1 :current-section))
 (re/reg-sub :menu-open #(get %1 :menu-open))
+(re/reg-sub :scroll-is-at-beginning #(get %1 :scroll-is-at-beginning))
+
+(re/reg-sub :current-year #(.getFullYear (js/Date.)))

@@ -15,11 +15,18 @@
 
   :clean-targets ^{:protect false} ["resources/public/js/compiled" "target"]
 
-  :figwheel {:css-dirs ["resources/public/css"]}
+  :figwheel {:css-dirs ["resources/public/css"]
+             :nrepl-middleware ["cider.nrepl/cider-middleware"
+                                "refactor-nrepl.middleware/wrap-refactor"
+                                "cemerick.piggieback/wrap-cljs-repl"]
+             :nrepl-port 7888}
 
   :profiles
   {:dev
    {:dependencies [[binaryage/devtools "0.9.10"]
+                   [org.clojure/tools.nrepl "0.2.13"]
+                   [com.cemerick/piggieback "0.2.2"]
+
                    [day8.re-frame/re-frame-10x "0.3.3"]
                    [day8.re-frame/tracing "0.5.1"]]
 
@@ -31,7 +38,10 @@
   {:builds
    [{:id           "dev"
      :source-paths ["src/cljs"]
-     :figwheel     {:on-jsload "clojure-cv.core/mount-root" ;:websocket-host ~(.getHostAddress (java.net.Inet4Address/getLocalHost))
+     :figwheel     {
+                    :on-jsload  "clojure-cv.core/mount-root"
+
+                    :websocket-host ~(.getHostAddress (java.net.Inet4Address/getLocalHost))
                     }
      :compiler     {:main                 clojure-cv.core
                     :output-to            "resources/public/js/compiled/app.js"
