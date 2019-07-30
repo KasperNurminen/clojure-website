@@ -2,6 +2,7 @@
   (:require
    [re-frame.core :as re]
    [clojure-cv.db :as db]
+   [accountant.core :as accountant]
    [day8.re-frame.tracing :refer-macros [fn-traced defn-traced]]
    ))
 
@@ -9,6 +10,7 @@
  ::initialize-db
  (fn-traced [_ _]
    db/default-db))
+
 (re/reg-event-db :modal
   (fn [db [_ val]]
     (assoc db :modal-open val)))
@@ -29,10 +31,20 @@
   (fn [_ [_ id]]
     {:scroll-into-view id}))
 
+(re/reg-fx :navigate-to-home
+  (fn []
+    (accountant/navigate! "/")))
+
+(re/reg-event-fx :navigate-to-portfolio
+  (fn [_]
+    {:navigate-to-home nil
+     :dispatch-later   [{:dispatch [:scroll-into-view "portfolio"] :ms 200}]}))
+
 (re/reg-fx :scroll-into-view
   (fn [id]
     (-> (.querySelector js/document (str "#" id))
         (.scrollIntoView (clj->js {:behavior "smooth" :block "start"})))))
+
 
 (re/reg-sub :modal-open #(get %1 :modal-open))
 (re/reg-sub :current-section #(get %1 :current-section))

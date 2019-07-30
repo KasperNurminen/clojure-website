@@ -4,3 +4,8 @@
 /resources/public/js/compiled
 out
 *.iml
+.rebel_readline_history
+node_modules/
+package-lock.json
+package.json
+
