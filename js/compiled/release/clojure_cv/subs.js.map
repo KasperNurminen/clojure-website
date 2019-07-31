@@ -1,0 +1,1 @@
+{"version":3,"file":"\/Users\/kasper\/Projects\/clojure-cv\/resources\/public\/js\/compiled\/release\/clojure_cv\/subs.js","sources":["subs.cljs"],"lineCount":9,"mappings":";AAAA;;;AAIA,gCAAA,hCAACA,kHAEA,WAAKC;AAAL,AACE,OAAA,mFAAOA","names":["re-frame.core\/reg-sub","db"]}
