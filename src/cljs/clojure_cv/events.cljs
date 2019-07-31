@@ -27,9 +27,10 @@
   (fn [db _]
     (let [menu-state (get db :menu-open)]
       (assoc db :menu-open (not menu-state)))))
+
 (re/reg-event-fx :scroll-into-view
-  (fn [_ [_ id]]
-    {:scroll-into-view id}))
+  (fn [_ [_ id instant?]]
+    {:scroll-into-view [id instant?]}))
 
 (re/reg-fx :navigate-to-home
   (fn []
@@ -38,12 +39,15 @@
 (re/reg-event-fx :navigate-to-portfolio
   (fn [_]
     {:navigate-to-home nil
-     :dispatch-later   [{:dispatch [:scroll-into-view "portfolio"] :ms 200}]}))
+     :dispatch-later   [{:dispatch [:scroll-into-view "portfolio" true] :ms 150}]}))
 
 (re/reg-fx :scroll-into-view
-  (fn [id]
+  (fn [[id instant?]]
     (-> (.querySelector js/document (str "#" id))
-        (.scrollIntoView (clj->js {:behavior "smooth" :block "start"})))))
+        (.scrollIntoView (clj->js (merge
+                                    (when (not instant?)
+                                      {:behavior "smooth"})
+                                    {:block "start"}))))))
 
 
 (re/reg-sub :modal-open #(get %1 :modal-open))

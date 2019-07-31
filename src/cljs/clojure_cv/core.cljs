@@ -1,13 +1,13 @@
 (ns clojure-cv.core
   (:require
+    [cljsjs.material-ui]
     [reagent.core :as r]
     [re-frame.core :as re-frame]
     [cljsjs.react-tooltip]
-    [vanilla-tilt]
     [clojure-cv.events :as events]
     [clojure-cv.config :as config]
     [clojure-cv.views.core :refer [main-panel main-page ]]
-    [clojure-cv.views.portfolio :refer [ilmomasiina kaspernurminen]]
+    [clojure-cv.views.portfolio :refer [ilmomasiina kaspernurminen oloscreen]]
     [secretary.core :as secretary :include-macros true]
     [accountant.core :as accountant]
     [goog.events :as goog-events]
@@ -37,6 +37,9 @@
 
 (secretary/defroute "/portfolio/kaspernurminen" []
   (reset! selected-page kaspernurminen))
+
+(secretary/defroute "/portfolio/oloscreen" []
+  (reset! selected-page oloscreen))
 
 (defn hook-browser-navigation! []
   (doto (History.)

@@ -6,8 +6,6 @@
             [accountant.core :as accountant]
             [re-frame.core :as re]))
 
-
-
 (defn linkedin []
   [:svg {:x "0px" :y "0px" :width "22px" :height "22px" :view-box "0 0 430.117 430.117"}
    [:g
@@ -63,7 +61,7 @@
     [:div.star-view
      [:span {:style (merge
                       (when subsection? {:margin-left "2rem"})
-                      {:margin-right "1rem"})} name]
+                      {:margin-right "0rem"})} name]
      [:span.stars (repeatedly stars (fn [] ^{:key (gensym)} [:div#marker])) (repeatedly outlines (fn [] ^{:key (gensym)} [:div#marker-outline]))]]))
 
 (defn skills []
@@ -93,6 +91,7 @@
        [star-view "React" 4 true]
        [star-view "Redux" 3 true]
        [star-view "CSS" 5]
+       [star-view "Sass" 4 true]
        [star-view "HTML" 5]
        [star-view "Git" 5]
        [star-view "Python" 4]
@@ -104,9 +103,7 @@
        [star-view "Software processes" 3]
        [star-view "Photoshop" 3]
        [star-view "Illustrator" 2]
-       [star-view "Sketch" 1]
-       [star-view "Adobe Premiere" 1]]
-      ]]))
+       [star-view "Sketch" 1]]]]))
 
 (defn experience-listing [{:keys [title years subtitle text]}]
   [:div
@@ -127,24 +124,33 @@
     [:h1 "Education"]
     (map (fn [ed]  ^{:key (:title ed)}[experience-listing ed]) (get-in texts/texts [:education]))]])
 
+(def data-tilt-props
+  {"data-tilt-scale"  1.05
+   "data-tilt" true
+   "data-tilt-max" 2})
 
 (defn portfolio []
-  (r/create-class
-    {:component-did-mount (fn []
-                            (.init js/VanillaTilt (.querySelectorAll js/document ".portfolio-image") (clj->js {:scale 1.05
-                                                                                                               :max   2})))
-     :reagent-render      (fn []
-                            [:section#portfolio
-                             [:div {:style {:padding "2rem"}}
-                              [:h1 "Portfolio"]
-                              [:div.d-flex.flex-wrap {:style {
-                                                              :margin-top "2rem"
-                                                              :width      "100%"}}
-                               [:div.portfolio-image {:on-click #(accountant/navigate! "/portfolio/ilmomasiina")
-                                                      :style    {:background-image "url(assets/ilmomasiina.png)"}} [:h1 (get-in texts/texts [:ilmomasiina :title])]]
-                               [:div.portfolio-image {:on-click #(accountant/navigate! "/portfolio/kaspernurminen")
-                                                      :style {:background-image "url(assets/kaspernurminenfi.png)"
-                                                              :color            "white"}} [:h1 "kaspernurminen.fi"]]]]])}))(defn contact []
+  (fn []
+    [:section#portfolio
+     [:div {:style {:padding "2rem"}}
+      [:h1 "Portfolio"]
+      [:div.d-flex.flex-wrap {
+                              :style {
+                                      :margin-top "2rem"
+                                      :width      "100%"}}
+       [:div.portfolio-image (merge data-tilt-props
+                               {:on-click #(accountant/navigate! "/portfolio/ilmomasiina")
+                                :style    {:background-image "url(assets/ilmomasiina.png)"}}) [:h1 (get-in texts/texts [:ilmomasiina :title])]]
+       [:div.portfolio-image (merge data-tilt-props
+                               {:on-click #(accountant/navigate! "/portfolio/kaspernurminen")
+                                :style    {:background-image "url(assets/kaspernurminenfi.png)"
+                                           :color            "white"}}) [:h1 "kaspernurminen.fi"]]
+       [:div.portfolio-image (merge data-tilt-props
+                               {:on-click #(accountant/navigate! "/portfolio/oloscreen")
+                                :style    {:background-image "url(assets/oloscreen.png)"
+                                           :color            "white"}}) [:h1 "Oloscreen"]]]]]))
+
+(defn contact []
   [:section#contact
    [:div {:style {:padding "2rem"}}
     [:h1 "Contact"]
@@ -152,7 +158,7 @@
      [ui/flat-button {:class-name "contact-icon"
                       :href       "tel:+358400509387"
                       :label      "+358400509387"
-                      :icon       (r/as-component [ic/communication-phone])
+                      :icon       (r/as-element [ic/communication-phone])
                       :style      {:stroke "#0069f4"}} ]]
     [:div.d-flex {:style {:justify-content "center"}}
      [ui/icon-button {:class-name "contact-icon"
