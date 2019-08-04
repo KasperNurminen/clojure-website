@@ -30,6 +30,7 @@
 
   :figwheel {:ring-handler     clojure-cv.app-server/handler
              :css-dirs         ["resources/public/css"]
+             :server-port 3449
              :nrepl-middleware ["cemerick.piggieback/wrap-cljs-repl"]
              :nrepl-port       7888}
 
@@ -50,12 +51,15 @@
    {:dev {:source-paths ["src/cljs"]
           :figwheel     {:on-jsload      "clojure-cv.core/mount-root"
                          :open-urls      ["http://localhost:3449/"]
-                         :websocket-host ~(.getHostAddress (java.net.Inet4Address/getLocalHost))
+
                          }
           :compiler     {:main            clojure-cv.core
                          :output-to       "resources/public/js/compiled/app.js"
                          :output-dir      "resources/public/js/compiled/out"
-                         :install-deps    true
+                         :optimizations   :none
+                         :pretty-print    true
+                         :npm-deps {:vanilla-tilt "1.7.0"}
+                         :install-deps true
                          :asset-path      "js/compiled/out"
                          :source-map      true
                          :preloads        [day8.re-frame-10x.preload]

@@ -3,6 +3,8 @@
             [clojure-cv.texts :as texts]
             [cljs-react-material-ui.reagent :as ui]
             [cljs-react-material-ui.icons :as ic]
+            [clojure-cv.subs]
+            [vanilla-tilt :as vanilla-tilt]
             [accountant.core :as accountant]
             [re-frame.core :as re]))
 
@@ -17,9 +19,11 @@
      [:div#main-left
       [:div#face
        [:img.avatar {:src "assets/kasper-light.jpg"}]
-       [:div {:style {:text-align "center"}}
-        [:h2.title "Kasper Nurminen"]
-        [:h3.title {:style {:color "#AAAAAA"}} "Software Developer"]
+       [:div.text-center
+        [:h2.title  "Kasper Nurminen"]
+        [:h3.title {:style {:color "#AAAAAA"
+                            :line-height "1.2rem"
+                            :font-size "1.2rem"}} "Software Developer"]
 
         [ui/icon-button {:class-name "contact-icon"
                          :href       "mailto:kasper.nurminen@aalto.fi"
@@ -28,30 +32,31 @@
                          :href      "https://www.linkedin.com/in/kasper-nurminen/"
                          }
          [linkedin]]]]]
-     [:div#main-right
+     [:div#main-right.ml-4
       (get-in texts/texts [:main :who-am-i])
-      [:div.col-2 {:style {:justify-content "center"}}
-       [:div
+      [:div.d-flex.flex-wrap
+       [:div.col-md-6.pl-0
         [:h3 "Education"]
         [ui/list
          (map (fn [item]
 
                 ^{:key (:title item)}
                 [ui/list-item {:secondary-text (:subtitle item)
+                               :secondary-text-lines 2
                                :on-click       (or (:on-click item) #(re/dispatch [:scroll-into-view "education"]))
                                :primary-text   (:title item)
                                :left-icon      (ic/social-school)}]
 
                 ) (:education texts))]]
-       [:div.mr-2
-        [:h3 "Interests"]
+       [:div.col-md-6
+        [:h3 "Top skills"]
         [ui/list
          (map (fn [item]
                 ^{:key (:title item)}
                 [ui/list-item {:primary-text   (:title item)
                                :secondary-text (:subtitle item)
-                               :hover-color    "white"
-                               :style          {:cursor "initial"}
+                               :secondary-text-lines 2
+                               :on-click       (or (:on-click item) #(re/dispatch [:scroll-into-view "skills"]))
                                :left-icon      ((:icon item))}])
            (:interests (get-in texts/texts [:main])))]]]]]))
 
@@ -67,21 +72,19 @@
 (defn skills []
   (let [tooltip (r/adapt-react-class js/ReactTooltip)]
     [:section#skills.d-flex.flex-wrap
-     [:div.desktop-w-70 {:style {:padding "2rem"}}
-      [:h1 "Skills"]
-      [:div.d-flex.flex-wrap {:style {:max-width "90%"}}
+     [:div.col-md-8.pr-5
+      [:h1.mb-0 "Skills"]
+      [:div.d-flex.flex-wrap {:style {:max-width "100%"}}
        (get-in texts/texts [:skills 0])
        (get-in texts/texts [:skills 1])
        (get-in texts/texts [:skills 2])]]
-     [:div.desktop-w-20 {:style {:margin-top   "5rem"
-                                 :margin-left  "2rem"
-                                 }}
+     [:div.col-md-4 {:style {:margin-top   "5rem"}}
 
       [tooltip {:id        "visualization-explanation"
                 :multiline true}
        "Visualized as a relative scale - does not represent overall knowledge of the topic." [:br] "My best skill is represented as 5 filled circles, and my worst marketable skill as 1 filled circle."]
-      [:div {:style {:width "95%"}}
-       [:h4 {:style {:margin-bottom 0}} "Programming technologies"
+      [:div
+       [:h4  "Programming technologies"
         [:span.tooltip {:data-tip true :data-for "visualization-explanation"} "?"]]
 
        [star-view "ClojureScript" 5]
@@ -94,10 +97,10 @@
        [star-view "Sass" 4 true]
        [star-view "HTML" 5]
        [star-view "Git" 5]
+       [star-view "SQL/Postgres" 4]
        [star-view "Python" 4]
        [star-view "Django" 3 true]
        [star-view "Scala" 3]
-       [star-view "SQL/Postgres" 4]
        [star-view "Clojure" 3]
        [:h4 "Other"]
        [star-view "Software processes" 3]
@@ -106,57 +109,69 @@
        [star-view "Sketch" 1]]]]))
 
 (defn experience-listing [{:keys [title years subtitle text]}]
-  [:div
-   [:h3 {:style {:margin-bottom "0.5rem"}} (str title " ") [:i {:style {:font-size "1.25rem"}} years]]
-   [:p {:style {:margin-top 0}} [:i subtitle]]
-   text])
+  [:div.row
+   [:div.col-md-4
+    [:h3.mt-3.mb-2  (str title " ") [:i {:style {:font-size "1.25rem"}} years]]
+    [:p.mt-0  [:i subtitle]]]
+   [:div.col-md-8 text]])
 
 
 (defn job-experience []
   [:section#job-experience
-   [:div {:style {:padding "2rem"}}
-    [:h1 "Job experience"]
-    (map (fn [ed]  ^{:key (:title ed)}[experience-listing ed]) (get-in texts/texts [:job-experience]))]])
+   [:h1.text-align-center "Job experience"]
+   (map (fn [ed] ^{:key (:title ed)} [experience-listing ed]) (get-in texts/texts [:job-experience]))])
 
 (defn education []
   [:section#education
-   [:div {:style {:padding "2rem"}}
-    [:h1 "Education"]
-    (map (fn [ed]  ^{:key (:title ed)}[experience-listing ed]) (get-in texts/texts [:education]))]])
+   [:h1 "Education"]
+   (map (fn [ed] ^{:key (:title ed)} [experience-listing ed]) (get-in texts/texts [:education]))])
 
 (def data-tilt-props
   {"data-tilt-scale"  1.05
-   "data-tilt" true
+   ;"data-tilt" true
    "data-tilt-max" 2})
+
+(defn start-tilt []
+  (.init vanilla-tilt (.querySelectorAll js/document ".portfolio-image")
+    (clj->js {"scale" 1.05
+              "max" 2})))
 
 (defn portfolio []
   (fn []
-    [:section#portfolio
-     [:div {:style {:padding "2rem"}}
-      [:h1 "Portfolio"]
-      [:div.d-flex.flex-wrap {
-                              :style {
-                                      :margin-top "2rem"
-                                      :width      "100%"}}
-       [:div.portfolio-image (merge data-tilt-props
-                               {:on-click #(accountant/navigate! "/portfolio/ilmomasiina")
-                                :style    {:background-image "url(assets/ilmomasiina.png)"}}) [:h1 (get-in texts/texts [:ilmomasiina :title])]]
-       [:div.portfolio-image (merge data-tilt-props
-                               {:on-click #(accountant/navigate! "/portfolio/kaspernurminen")
-                                :style    {:background-image "url(assets/kaspernurminenfi.png)"
-                                           :color            "white"}}) [:h1 "kaspernurminen.fi"]]
-       [:div.portfolio-image (merge data-tilt-props
-                               {:on-click #(accountant/navigate! "/portfolio/oloscreen")
-                                :style    {:background-image "url(assets/oloscreen.png)"
-                                           :color            "white"}}) [:h1 "Oloscreen"]]]]]))
+    (r/with-let [_ (js/setTimeout start-tilt 1000)]
+      [:section#portfolio
+       [:h1 "Portfolio"]
+       [:h2 {:style {:text-align "center"}} [:i "Personal projects"]]
+       [:div.d-flex.flex-wrap {:style {:margin-top "2rem"
+                                       :width      "100%"}}
+        [:div.portfolio-image {:on-click #(re/dispatch [:navigate-to-portfolio-page :ilmomasiina])
+                               :style    {:background-image "url(assets/ilmomasiina.png)"}} [:h1 (get-in texts/texts [:ilmomasiina :title])]]
+        [:div.portfolio-image {:on-click #(re/dispatch [:navigate-to-portfolio-page :kaspernurminen])
+                               :style    {:background-image "url(assets/kaspernurminenfi.png)"
+                                          :color            "white"}} [:h1 "kaspernurminen.fi"]]
+        [:div.portfolio-image {:on-click #(re/dispatch [:navigate-to-portfolio-page :oloscreen])
+                               :style    {:background-image "url(assets/oloscreen.png)"
+                                          :color            "white"}} [:h1 "Oloscreen"]]
+        [:div.portfolio-image {:on-click #(re/dispatch [:navigate-to-portfolio-page :infodisplay])
+                               :style    {:background-image "url(assets/infodisplay.png)"}} [:h1 "Infodisplay"]]]
+       [:h2 {:style {:text-align "center"}} [:i "Commercial projects I have been involved with"]]
+       [:div.d-flex.flex-wrap {:style {
+                                       :margin-top "2rem"
+                                       :width      "100%"}}
+        [:div.portfolio-image {:on-click #(re/dispatch [:navigate-to-portfolio-page :ilmomasiina])
+                               :style    {:background-image "url(https://www.taiste.fi/assets/img/work/valopilkku/valopilkku-in-use-1312.webp"}} [:h1 "Valopilkku (Suomen Taksiliitto)"]]
+        [:div.portfolio-image {:on-click #(re/dispatch [:navigate-to-portfolio-page :ilmomasiina])
+                               :style    {:background-image "url(https://www.taiste.fi/assets/img/work/hesburger/hesburger-hiccup-1000.webp"}} [:h1 "Design System (Hesburger)"]]]])))
 
 (defn contact []
-  [:section#contact
-   [:div {:style {:padding "2rem"}}
+  [:section#contact {:style {:padding-top "2rem"
+                             :padding-bottom "2rem"}}
+   [:div.p-2
     [:h1 "Contact"]
     [:div.d-flex {:style {:justify-content "center"}}
      [ui/flat-button {:class-name "contact-icon"
                       :href       "tel:+358400509387"
+                      :label-style {:bottom "6px"}
                       :label      "+358400509387"
                       :icon       (r/as-element [ic/communication-phone])
                       :style      {:stroke "#0069f4"}} ]]
@@ -173,6 +188,6 @@
   (let [current-year (re/subscribe [:current-year])]
     [:div
      [ui/divider]
-     [:div {:style {:display "flex" :justify-content "center" :align-items "center"}}
+     [:div.d-flex.justify-content-center.align-items-center
 
       [:p "Copyright Kasper Nurminen " @current-year]]]))

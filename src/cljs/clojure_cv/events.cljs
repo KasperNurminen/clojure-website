@@ -41,6 +41,16 @@
     {:navigate-to-home nil
      :dispatch-later   [{:dispatch [:scroll-into-view "portfolio" true] :ms 150}]}))
 
+(re/reg-fx :navigate-to-page
+  (fn [page]
+    (accountant/navigate! page)))
+
+(re/reg-event-fx :navigate-to-portfolio-page
+  (fn [_ [_ page]]
+    {:navigate-to-page (str "/portfolio/" (name page))
+     :scroll-to-top    nil}))
+
+
 (re/reg-fx :scroll-into-view
   (fn [[id instant?]]
     (-> (.querySelector js/document (str "#" id))
@@ -49,10 +59,12 @@
                                       {:behavior "smooth"})
                                     {:block "start"}))))))
 
+(re/reg-fx :scroll-to-top
+  (fn []
+    (.scrollTo js/window 0 0)))
 
-(re/reg-sub :modal-open #(get %1 :modal-open))
-(re/reg-sub :current-section #(get %1 :current-section))
-(re/reg-sub :menu-open #(get %1 :menu-open))
-(re/reg-sub :scroll-is-at-beginning #(get %1 :scroll-is-at-beginning))
+(re/reg-event-db :toggle-image-enlargement
+  (fn [db _]
+    (assoc db :image-enlarged (not (:image-enlarged db)))))
 
-(re/reg-sub :current-year #(.getFullYear (js/Date.)))
+
