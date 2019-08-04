@@ -20,16 +20,16 @@
       [:div#face
        [:img.avatar {:src "assets/kasper-light.jpg"}]
        [:div.text-center
-        [:h2.title  "Kasper Nurminen"]
-        [:h3.title {:style {:color "#AAAAAA"
+        [:h2.title "Kasper Nurminen"]
+        [:h3.title {:style {:color       "#AAAAAA"
                             :line-height "1.2rem"
-                            :font-size "1.2rem"}} "Software Developer"]
+                            :font-size   "1.2rem"}} "Software Developer"]
 
         [ui/icon-button {:class-name "contact-icon"
                          :href       "mailto:kasper.nurminen@aalto.fi"
                          :style      {:stroke "#0069f4"}} (ic/communication-mail-outline)]
         [ui/icon-button {:class-name "contact-icon"
-                         :href      "https://www.linkedin.com/in/kasper-nurminen/"
+                         :href       "https://www.linkedin.com/in/kasper-nurminen/"
                          }
          [linkedin]]]]]
      [:div#main-right.ml-4
@@ -41,11 +41,11 @@
          (map (fn [item]
 
                 ^{:key (:title item)}
-                [ui/list-item {:secondary-text (:subtitle item)
+                [ui/list-item {:secondary-text       (:subtitle item)
                                :secondary-text-lines 2
-                               :on-click       (or (:on-click item) #(re/dispatch [:scroll-into-view "education"]))
-                               :primary-text   (:title item)
-                               :left-icon      (ic/social-school)}]
+                               :on-click             (or (:on-click item) #(re/dispatch [:scroll-into-view "education"]))
+                               :primary-text         (:title item)
+                               :left-icon            (ic/social-school)}]
 
                 ) (:education texts))]]
        [:div.col-md-6
@@ -53,11 +53,11 @@
         [ui/list
          (map (fn [item]
                 ^{:key (:title item)}
-                [ui/list-item {:primary-text   (:title item)
-                               :secondary-text (:subtitle item)
+                [ui/list-item {:primary-text         (:title item)
+                               :secondary-text       (:subtitle item)
                                :secondary-text-lines 2
-                               :on-click       (or (:on-click item) #(re/dispatch [:scroll-into-view "skills"]))
-                               :left-icon      ((:icon item))}])
+                               :on-click             (or (:on-click item) #(re/dispatch [:scroll-into-view "skills"]))
+                               :left-icon            ((:icon item))}])
            (:interests (get-in texts/texts [:main])))]]]]]))
 
 
@@ -78,13 +78,13 @@
        (get-in texts/texts [:skills 0])
        (get-in texts/texts [:skills 1])
        (get-in texts/texts [:skills 2])]]
-     [:div.col-md-4 {:style {:margin-top   "5rem"}}
+     [:div.col-md-4 {:style {:margin-top "5rem"}}
 
       [tooltip {:id        "visualization-explanation"
                 :multiline true}
        "Visualized as a relative scale - does not represent overall knowledge of the topic." [:br] "My best skill is represented as 5 filled circles, and my worst marketable skill as 1 filled circle."]
       [:div
-       [:h4  "Programming technologies"
+       [:h4 "Programming technologies"
         [:span.tooltip {:data-tip true :data-for "visualization-explanation"} "?"]]
 
        [star-view "ClojureScript" 5]
@@ -111,8 +111,8 @@
 (defn experience-listing [{:keys [title years subtitle text]}]
   [:div.row
    [:div.col-md-4
-    [:h3.mt-3.mb-2  (str title " ") [:i {:style {:font-size "1.25rem"}} years]]
-    [:p.mt-0  [:i subtitle]]]
+    [:h3.mt-3.mb-2 (str title " ") [:i {:style {:font-size "1.25rem"}} years]]
+    [:p.mt-0 [:i subtitle]]]
    [:div.col-md-8 text]])
 
 
@@ -127,18 +127,18 @@
    (map (fn [ed] ^{:key (:title ed)} [experience-listing ed]) (get-in texts/texts [:education]))])
 
 (def data-tilt-props
-  {"data-tilt-scale"  1.05
+  {"data-tilt-scale" 1.05
    ;"data-tilt" true
-   "data-tilt-max" 2})
+   "data-tilt-max"   2})
 
 (defn start-tilt []
   (.init vanilla-tilt (.querySelectorAll js/document ".portfolio-image")
     (clj->js {"scale" 1.05
-              "max" 2})))
+              "max"   2})))
 
 (defn portfolio []
   (fn []
-    (r/with-let [_ (js/setTimeout start-tilt 1000)]
+    (r/with-let [_ (js/setTimeout start-tilt 500)]
       [:section#portfolio
        [:h1 "Portfolio"]
        [:h2 {:style {:text-align "center"}} [:i "Personal projects"]]
@@ -158,23 +158,27 @@
        [:div.d-flex.flex-wrap {:style {
                                        :margin-top "2rem"
                                        :width      "100%"}}
-        [:div.portfolio-image {:on-click #(re/dispatch [:navigate-to-portfolio-page :ilmomasiina])
-                               :style    {:background-image "url(https://www.taiste.fi/assets/img/work/valopilkku/valopilkku-in-use-1312.webp"}} [:h1 "Valopilkku (Suomen Taksiliitto)"]]
-        [:div.portfolio-image {:on-click #(re/dispatch [:navigate-to-portfolio-page :ilmomasiina])
-                               :style    {:background-image "url(https://www.taiste.fi/assets/img/work/hesburger/hesburger-hiccup-1000.webp"}} [:h1 "Design System (Hesburger)"]]]])))
+        [:a.portfolio-image {:href  "https://www.taiste.fi/work/valopilkku/"
+                             :style {:color            "black"
+                                     :text-decoration  "none"
+                                     :background-image "url(https://www.taiste.fi/assets/img/work/valopilkku/valopilkku-in-use-1312.webp"}} [:h1 "Valopilkku (Suomen Taksiliitto)"]]
+        [:a.portfolio-image {:href  "https://www.taiste.fi/work/hesburger/"
+                             :style {:color            "black"
+                                     :text-decoration  "none"
+                                     :background-image "url(https://www.taiste.fi/assets/img/work/hesburger/hesburger-hiccup-1000.webp"}} [:h1 "Design System (Hesburger)"]]]])))
 
 (defn contact []
-  [:section#contact {:style {:padding-top "2rem"
+  [:section#contact {:style {:padding-top    "2rem"
                              :padding-bottom "2rem"}}
    [:div.p-2
     [:h1 "Contact"]
     [:div.d-flex {:style {:justify-content "center"}}
-     [ui/flat-button {:class-name "contact-icon"
-                      :href       "tel:+358400509387"
+     [ui/flat-button {:class-name  "contact-icon"
+                      :href        "tel:+358400509387"
                       :label-style {:bottom "6px"}
-                      :label      "+358400509387"
-                      :icon       (r/as-element [ic/communication-phone])
-                      :style      {:stroke "#0069f4"}} ]]
+                      :label       "+358400509387"
+                      :icon        (r/as-element [ic/communication-phone])
+                      :style       {:stroke "#0069f4"}}]]
     [:div.d-flex {:style {:justify-content "center"}}
      [ui/icon-button {:class-name "contact-icon"
                       :href       "mailto:kasper.nurminen@aalto.fi"
