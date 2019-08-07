@@ -146,9 +146,11 @@
            (- 2)
            ) "%")))
 
-(defn render-timeline-marker [{:keys [title years subtitle text]}]
-
+(defn render-timeline-marker [{:keys [title text]}]
+  ^{:key title }
   [:div [:span [tooltip {:id        title
+                         :place "right"
+                         :type "info"
                          :multiline true} text]]
    [:div.marker.big {:data-tip true
                      :data-for title
@@ -161,7 +163,7 @@
 
 (defn achievements []
   [:section#achievements
-   [:h1.text-align-center "Academic achievements"]
+   [:h1.text-align-center "Achievements"]
    [:i "Hover over the dots to view more information"]
    [:div.achievements-timeline
     (map render-timeline-marker (get-in texts/texts [:achievements]))]])
