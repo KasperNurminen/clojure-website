@@ -77,7 +77,7 @@
                                {:title "2017"
                                 :text  "Finished the Finnish army as a military engineer."}
                                {:title "2016"
-                                :text  "A grant from K.F Helisevä fund for excellent success in matriculation examinations. I also received books as prizes for excellent performace in English, Finnish and social studies matriculation exams."}
+                                :text  [:span "A grant from K.F Helisevä fund for excellent success in matriculation examinations." [:br] "I also received books as prizes for excellent performace in English, Finnish and social studies matriculation exams."]}
                                {:title "2014"
                                 :text  "A grant for excellent information technology knowledge in Kerttuli School of ICT."}
                                {:title "2013"

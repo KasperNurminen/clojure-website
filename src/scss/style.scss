@@ -255,10 +255,14 @@ padding: 0;
     height: 25px;
     width: 25px;
     border-radius: 25px;
+
+     &:hover{
+      transition: all 0.1s cubic-bezier(0.55, 0.09, 0.68, 0.53) !important;
+       transform: scale(1.2);
+      }
   }
-
-
 }
+
 .marker-outline{
   border: 2px solid #4199ee;
   height: 15px;
@@ -284,14 +288,14 @@ padding: 0;
   &:before{
   content: "|";
   position: absolute;
-  bottom: -7px;
+  bottom: -8px;
   left: -2px;
   }
 
   &:after{
   content: "|";
   position: absolute;
-  bottom: -7px;
+  bottom: -8px;
   right: -2px;
   }
  }
@@ -331,7 +335,7 @@ padding: 0;
   cursor: pointer;
   transform-style: preserve-3d;
   transform: perspective(1000px);
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   & > h1{
     transform: translateZ(100px);
     font-size: 1.2rem;
