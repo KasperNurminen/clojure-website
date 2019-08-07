@@ -40,7 +40,7 @@
            (when @image-enlarged
              {:class "enlarged"})
            {:on-click #(re/dispatch [:toggle-image-enlargement])
-            :style    {:background-image (str "url(../../assets/" (name key) ".png)")}})]]
+            :style    {:background-image (str "url(../../assets/" (name key) ".webp)")}})]]
        [:div.row.m-4
         (get-in texts/texts [key :text])]
 

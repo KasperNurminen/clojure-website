@@ -37,7 +37,7 @@
                                 [:p "I also like to take a leadership-role in teams, when necessary. I like to get things done and often have a clear vision on how I would complete the task. I do, however, realize that my way to do it is not always the best, and listening to others is very important. If there is a better or more experienced leader in the group, I won't hesitate giving the command to them."]]
                                [:span
                                 [:h4 "Languages"]
-                                [:p "My native language is Finnish and my English is also quite good. I can also communicate in Swedish, and know the basics of German."]]
+                                [:p "My native language is Finnish and I am fluent in English. I can also communicate in Swedish, and know the basics of German."]]
                                ]
             :education        [{:text     [:span
                                            [:p "Information Networks is a trans-disciplinary study programme in engineering building on information and communication technology (ICT) and digital media. It combines the fields of social sciences, advanced digital technologies and business."]
@@ -47,7 +47,7 @@
                                 :years    "2017 - 2022"
                                 :subtitle "Information Networks, Aalto University"}
                                {:text     [:span [:p "I completed 13 ECTS of basic computer science courses alongside my studies in Kerttuli, before I started at Aalto University."]]
-                                :title    "Seperate study module (13 ECTS)"
+                                :title    "Separate study module (13 ECTS)"
                                 :years    "2015 - 2016"
                                 :subtitle "University of Turku"}
                                {:text     [:span [:p "The only ICT-focused high school in Finland. I learned, among other things, the basics of Information and Communication Technologies, the basics of programming, and usage of InDesign."]]

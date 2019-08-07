@@ -325,7 +325,7 @@ padding: 0;
 .portfolio-image{
   width:  100%;
   background-size: cover;
-  height: 300px;
+  height: 200px;
   background-color: green;
   display: flex;
   justify-content: center;
@@ -341,8 +341,11 @@ padding: 0;
     font-size: 1.2rem;
   }
   & h1{
-    color: inherit;
-
+    color: black;
+   text-shadow: 0px -1px 0px rgba(255, 255, 255, 0.95),
+                0px 1px 0px rgba(255, 255, 255, 0.95),
+                1px 0px 0px rgba(255, 255, 255, 0.95),
+                -1px 0px 0px rgba(255, 255, 255, 0.95);
   }
 
 }
@@ -351,7 +354,7 @@ padding: 0;
     top: 0;
     left: 0;
     width: 100vw;
-    height: 40vh;
+    height: 30vh;
     z-index: 10;
 }
 .cover{
@@ -389,11 +392,18 @@ padding: 0;
         max-width: 70%;
         min-width: 70%;
      }
-    .portfolio-image:not(.detail-page){
-        width: 47%;
-        margin: 1rem;
-        margin-bottom: 1rem;
-        height: 450px;
+    .portfolio-image{
+
+       &:not(.detail-page){
+          width: 47%;
+          margin: 1rem;
+          margin-bottom: 1rem;
+          height: 450px;
+      }
+
+    &.detail-page{
+       height: 750px;
+    }
     }
 
    section{
@@ -405,7 +415,7 @@ padding: 0;
           }
       }
     .enlarged{
-    height: 100vh;
+    height: 100vh !important;
     }
 }
 

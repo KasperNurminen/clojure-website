@@ -190,27 +190,27 @@
        [:div.d-flex.flex-wrap {:style {:margin-top "2rem"
                                        :width      "100%"}}
         [:div.portfolio-image {:on-click #(re/dispatch [:navigate-to-portfolio-page :ilmomasiina])
-                               :style    {:background-image "url(assets/ilmomasiina.png)"}} [:h1 (get-in texts/texts [:ilmomasiina :title])]]
+                               :style    {:background-image "url(assets/ilmomasiina.webp)"}} [:h1 (get-in texts/texts [:ilmomasiina :title])]]
         [:div.portfolio-image {:on-click #(re/dispatch [:navigate-to-portfolio-page :kaspernurminen])
-                               :style    {:background-image "url(assets/kaspernurminenfi.png)"
+                               :style    {:background-image "url(assets/kaspernurminenfi.webp)"
                                           :color            "white"}} [:h1 "kaspernurminen.fi"]]
         [:div.portfolio-image {:on-click #(re/dispatch [:navigate-to-portfolio-page :oloscreen])
-                               :style    {:background-image "url(assets/oloscreen.png)"
+                               :style    {:background-image "url(assets/oloscreen.webp)"
                                           :color            "white"}} [:h1 "Oloscreen"]]
         [:div.portfolio-image {:on-click #(re/dispatch [:navigate-to-portfolio-page :infodisplay])
-                               :style    {:background-image "url(assets/infodisplay.png)"}} [:h1 "Infodisplay"]]]
+                               :style    {:background-image "url(assets/infodisplay.webp)"}} [:h1 "Infodisplay"]]]
        [:h2 {:style {:text-align "center"}} [:i "Commercial projects I have been involved with"]]
        [:div.d-flex.flex-wrap {:style {
                                        :margin-top "2rem"
                                        :width      "100%"}}
         [:a.portfolio-image {:href  "https://www.taiste.fi/work/valopilkku/"
-                             :style {:color            "black"
+                             :style {
                                      :text-decoration  "none"
-                                     :background-image "url(https://www.taiste.fi/assets/img/work/valopilkku/valopilkku-in-use-1312.webp"}} [:h1 "Valopilkku (Suomen Taksiliitto)"]]
+                                     :background-image "url(assets/valopilkku-in-use-1312.webp"}} [:h1 "Valopilkku (Suomen Taksiliitto)"]]
         [:a.portfolio-image {:href  "https://www.taiste.fi/work/hesburger/"
-                             :style {:color            "black"
+                             :style {
                                      :text-decoration  "none"
-                                     :background-image "url(https://www.taiste.fi/assets/img/work/hesburger/hesburger-hiccup-1000.webp"}} [:h1 "Design System (Hesburger)"]]]])))
+                                     :background-image "url(assets/hesburger-hiccup-1000.webp"}} [:h1 "Design System (Hesburger)"]]]])))
 
 (defn contact []
   [:section#contact {:style {:padding-top    "2rem"
@@ -223,11 +223,15 @@
                       :label-style {:bottom "6px"}
                       :label       "+358400509387"
                       :icon        (r/as-element [ic/communication-phone])
+                      :style       {:stroke "#0069f4"}}]
+     [ui/flat-button {:class-name  "contact-icon"
+                      :href         "mailto:kasper.nurminen@aalto.fi"
+                      :label-style {:bottom "6px"
+                                    :text-transform "none"}
+                      :label        "kasper.nurminen@aalto.fi"
+                      :icon        (r/as-element [ic/communication-mail-outline])
                       :style       {:stroke "#0069f4"}}]]
     [:div.d-flex {:style {:justify-content "center"}}
-     [ui/icon-button {:class-name "contact-icon"
-                      :href       "mailto:kasper.nurminen@aalto.fi"
-                      :style      {:stroke "#0069f4"}} [ic/communication-mail-outline]]
      [ui/icon-button {:class-name "contact-icon"
                       :href       "https://www.linkedin.com/in/kasper-nurminen/"
                       } [linkedin]]]
