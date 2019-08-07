@@ -4,7 +4,7 @@
 (def texts {:main
                               {:who-am-i  [:div
                                            [:h1 "Who am I?"]
-                                           [:p "I am a 22-year old software developer from Finland. I have a couple of years of experience with Software Development, and I am currently studying for a Master's Degree in Information Networks in Aalto-University."]
+                                           [:p "I am an energetic and curious university student and software developer from Finland on my way to become an expert in software engineering. Despite my 22 years of age, I already have a couple of years of experience in software development. I am currently completing my Bachelor's Degree and preparing for Master's Degree in Information Networks in Aalto-University."]
                                            [:p "Jumping in at the deep end has always been my biggest strength - regardless of the task at hand, I jump straight at it and do whatever it takes to complete it. I am interested in how humans and computers interact (with a technical focus)."]
                                            [:p "On my free time I often climb (mostly bouldering), go to the gym and play video games. I also enjoy volunteering at our student guild Athene, where I am currently the CTO (responsible for IT systems)."]]
                                :education [{:title    "Master of Science in Technology (2020 - 2022)"
@@ -17,13 +17,13 @@
                                             :subtitle "Python, Javascript, ClojureScript, Scala"
                                             :icon     ic/hardware-computer
                                             }
-                                           {:title    "Management processes"
+                                           {:title    "Software Development processes"
                                             :subtitle "Agile, Waterfall, Scrum"
                                             :icon     ic/action-group-work
                                             }
-                                           {:title    "Client interaction"
-                                            :subtitle "Requirements engineering"
-                                            :icon     ic/social-people
+                                           {:title "Client interaction"
+                                            ;:subtitle "Requirements engineering"
+                                            :icon  ic/social-people
                                             }]
                                }
             :skills           [[:span
@@ -37,27 +37,29 @@
                                 [:p "I also like to take a leadership-role in teams, when necessary. I like to get things done and often have a clear vision on how I would complete the task. I do, however, realize that my way to do it is not always the best, and listening to others is very important. If there is a better or more experienced leader in the group, I won't hesitate giving the command to them."]]
                                [:span
                                 [:h4 "Languages"]
-                                [:p "My native language is Finnish, but my English is quite good also. I can also communicate in Swedish, and know the basics of German."]]
+                                [:p "My native language is Finnish and my English is also quite good. I can also communicate in Swedish, and know the basics of German."]]
                                ]
             :education        [{:text     [:span
                                            [:p "Information Networks is a trans-disciplinary study programme in engineering building on information and communication technology (ICT) and digital media. It combines the fields of social sciences, advanced digital technologies and business."]
                                            [:p "The programme builds on a vision where finding, defining and solving effectively relevant ICT and digital media related challenges is not possible without a holistic understanding about the interplay between technology, business and humans."]
-                                           [:p "I currently have completed 135 / 300 credits."]]
+                                           [:p "I currently have completed 135 / 180 credits of the Bachelor's degree and have GPA of 4.41."]]
                                 :title    "Master & Bachelor of Science in Technology"
                                 :years    "2017 - 2022"
                                 :subtitle "Information Networks, Aalto University"}
+                               {:text     [:span [:p "I completed 13 ECTS of basic computer science courses alongside my studies in Kerttuli, before I started at Aalto University."]]
+                                :title    "Seperate study module (13 ECTS)"
+                                :years    "2015 - 2016"
+                                :subtitle "University of Turku"}
                                {:text     [:span [:p "The only ICT-focused high school in Finland. I learned, among other things, the basics of Information and Communication Technologies, the basics of programming, and usage of InDesign."]]
                                 :title    "Undergraduate"
                                 :years    "2013 - 2016"
                                 :subtitle "Kerttuli School of ICT"}]
             :job-experience   [{:title    "Taiste Oy"
-                                :years    "1/2017 - present"
+                                :years    (fn [full-time part-time] [:span "1/2017 - present" [:br] full-time " mo. full-time, " part-time " mo. part-time"])
                                 :subtitle "Software Developer"
                                 :text     [:span [:p "Taiste builds mobile-driven digital solutions by combining customer insight, great UX and world-class technology expertise."]
                                            [:p "Clients I worked with include The Finnish Taxi Owners' Federation and Hesburger."]
-                                           [:p "My everyday job here consists of full-stack development with varying clients and diverse tasks, ranging from web- and backend technologies to build automation, deployment and testing."]]
-
-                                }
+                                           [:p "My everyday job with Taiste consists of full-stack development with varying clients and diverse tasks, ranging from web- and backend technologies to build automation, deployment and testing."]]}
                                {:title    "Lingsoft Oy"
                                 :years    "1⁄2017 - 12⁄2017"
                                 :subtitle "Transcriber"
@@ -68,6 +70,19 @@
                                 :subtitle "F2F-fundraiser / F2F-teamleader"
                                 :text     [:span [:p "Spreading the word about the Red Cross and getting new monthly donators. A marketing gig where I later got promoted to a team leader. I was in charge of the F2F team of Turku."]]
                                 }]
+            :achievements     [{:title "2019"
+                                :text  "Aalto University School of Science Dean’s incentive-based scholarship for good progress in studies."}
+                               {:title "2018"
+                                :text  "Aalto University School of Science Dean’s incentive-based scholarship for good progress in studies."}
+                               {:title "2017"
+                                :text  "Finished the Finnish army as a military engineer."}
+                               {:title "2016"
+                                :text  "A grant from K.F Helisevä fund for excellent success in matriculation examinations. I also received books as prizes for excellent performace in English, Finnish and social studies matriculation exams."}
+                               {:title "2014"
+                                :text  "A grant for excellent information technology knowledge in Kerttuli School of ICT."}
+                               {:title "2013"
+                                :text  "Top 10 placement in country-wide typing competition \"Typing Master\" (376 WPM)."}
+                               ]
             :ilmomasiina      {:title        "Athene's event registration machine"
                                :technologies "React, Redux, Node, Feathers"
                                :text         [:div
@@ -103,12 +118,12 @@
                                }
             :infodisplay      {:title        "Infodisplay"
                                :technologies "React, Leaflet, Material-UI"
-                               :buttons [{:title "View source in "
-                                          :type  :github
-                                          :href  "https://github.com/KasperNurminen/infodisplay"}]
-                               :text [:div
-                                      [:p "Infodisplay was a summer project of 2 people in the summer of 2018. The idea was to make a dashboard that could show the current time, weather and the next bus connections to the centrum."]
-                                      [:p "On the left side there is a Leaflet map which shows the nearest bus stops and their stop numbers. On the right there are 5 next bus connections towards the centrum and to other directions. Clicking on a bus connection  highlights the associated bus stop from the map."]
-                                      [:p "The project never got 100% finished as we ran out of time, but the bus API integration is completed and it is in usable condition. The weather data is not implemented, but otherwise it is working."]]
+                               :buttons      [{:title "View source in "
+                                               :type  :github
+                                               :href  "https://github.com/KasperNurminen/infodisplay"}]
+                               :text         [:div
+                                              [:p "Infodisplay was a summer project of 2 people in the summer of 2018. The idea was to make a dashboard that could show the current time, weather and the next bus connections to the centrum."]
+                                              [:p "On the left side there is a Leaflet map which shows the nearest bus stops and their stop numbers. On the right there are 5 next bus connections towards the centrum and to other directions. Clicking on a bus connection  highlights the associated bus stop from the map."]
+                                              [:p "The project never got 100% finished as we ran out of time, but the bus API integration is completed and it is in usable condition. The weather data is not implemented, but otherwise it is working."]]
                                }
             })

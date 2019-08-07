@@ -29,6 +29,7 @@
    [menu-button "Skills" "skills"]
    [menu-button "Job Experience" "job-experience"]
    [menu-button "Education" "education"]
+   [menu-button "Achievements" "achievements"]
    [menu-button "Portfolio" "portfolio"]
    [menu-button "Contact me" "contact"]])
 
@@ -89,6 +90,7 @@
       [sections/skills]
       [sections/job-experience]
       [sections/education]
+      [sections/achievements]
       [sections/portfolio]
       [sections/contact]
       [sections/copyright]

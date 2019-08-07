@@ -10,3 +10,24 @@
 (re/reg-sub :current-year #(.getFullYear (js/Date.)))
 
 (re/reg-sub :image-enlarged #(get %1 :image-enlarged))
+
+
+(defn month-diff [d1 d2]
+  (let [months (-> (- (.getFullYear d2) (.getFullYear d1))
+                 (* 12)
+                 (- (+ 1 (.getMonth d1)))
+                 (+ (.getMonth d2))
+                 (+ 2)                                      ;add start and end months
+                 )]
+    (max 0 months)))
+
+(re/reg-sub :taiste-months-working
+  (fn [_]
+    (let [start-date (js/Date. 2017 1 1)
+          summers-worked 2
+          extra-months 8
+          month-diff (month-diff start-date (js/Date.))
+          full-time (-> extra-months
+                      (+ (* summers-worked 3)))]
+      {:full-time full-time
+       :part-time (- month-diff full-time )})))

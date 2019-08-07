@@ -244,22 +244,57 @@ padding: 0;
   justify-content: flex-end;
 }
 
-#marker{
+.marker{
   background-color: #4199ee;
   height: 15px;
   width: 15px;
   border-radius: 15px;
   margin-right: 1px;
+  z-index: 10;
+  &.big{
+    height: 25px;
+    width: 25px;
+    border-radius: 25px;
+  }
+
 
 }
-#marker-outline{
+.marker-outline{
   border: 2px solid #4199ee;
-    height: 15px;
-    width: 15px;
-  border-radius: 11px;
-   margin-right: 1px;
+  height: 15px;
+  width: 15px;
+  border-radius: 15px;
+  margin-right: 1px;
+  z-index: 10;
+  &.big{
+    height: 25px;
+    width: 25px;
+    border-radius: 25px;
+  }
 }
 
+.achievements-timeline{
+  border: 0.5px solid black;
+  position: relative;
+  width: 90%;
+  margin-left: 1rem;
+  margin-top: 4rem;
+  height: 0px;
+
+  &:before{
+  content: "|";
+  position: absolute;
+  bottom: -7px;
+  left: -2px;
+  }
+
+  &:after{
+  content: "|";
+  position: absolute;
+  bottom: -7px;
+  right: -2px;
+  }
+ }
 .tooltip{
    position: absolute;
    color: white;
@@ -286,7 +321,7 @@ padding: 0;
 .portfolio-image{
   width:  100%;
   background-size: cover;
-  height: 700px;
+  height: 300px;
   background-color: green;
   display: flex;
   justify-content: center;
@@ -299,7 +334,7 @@ padding: 0;
   margin-bottom: 1rem;
   & > h1{
     transform: translateZ(100px);
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
   & h1{
     color: inherit;
@@ -324,7 +359,7 @@ padding: 0;
     width: 100vw;
     background-color: white;
 }
-@media only screen and (min-width: 1080px) {
+@media only screen and (min-width: 1200px) {
     #main {
         display: flex;
     }
@@ -366,7 +401,7 @@ padding: 0;
           }
       }
     .enlarged{
-    height: 80vh;
+    height: 100vh;
     }
 }
 

@@ -8,6 +8,8 @@
             [accountant.core :as accountant]
             [re-frame.core :as re]))
 
+(def tooltip (r/adapt-react-class js/ReactTooltip))
+
 (defn linkedin []
   [:svg {:x "0px" :y "0px" :width "22px" :height "22px" :view-box "0 0 430.117 430.117"}
    [:g
@@ -67,51 +69,57 @@
      [:span {:style (merge
                       (when subsection? {:margin-left "2rem"})
                       {:margin-right "0rem"})} name]
-     [:span.stars (repeatedly stars (fn [] ^{:key (gensym)} [:div#marker])) (repeatedly outlines (fn [] ^{:key (gensym)} [:div#marker-outline]))]]))
+     [:span.stars (repeatedly stars (fn [] ^{:key (gensym)} [:div.marker])) (repeatedly outlines (fn [] ^{:key (gensym)} [:div.marker-outline]))]]))
 
 (defn skills []
-  (let [tooltip (r/adapt-react-class js/ReactTooltip)]
-    [:section#skills.d-flex.flex-wrap
-     [:div.col-md-8.pr-5
-      [:h1.mb-0 "Skills"]
-      [:div.d-flex.flex-wrap {:style {:max-width "100%"}}
-       (get-in texts/texts [:skills 0])
-       (get-in texts/texts [:skills 1])
-       (get-in texts/texts [:skills 2])]]
-     [:div.col-md-4 {:style {:margin-top "5rem"}}
+  [:section#skills.d-flex.flex-wrap
+   [:div.col-md-8.pr-5
+    [:h1.mb-0 "Skills"]
+    [:div.d-flex.flex-wrap {:style {:max-width "100%"}}
+     (get-in texts/texts [:skills 0])
+     (get-in texts/texts [:skills 1])
+     (get-in texts/texts [:skills 2])]]
+   [:div.col-md-4 {:style {:margin-top "5rem"}}
 
-      [tooltip {:id        "visualization-explanation"
-                :multiline true}
-       "Visualized as a relative scale - does not represent overall knowledge of the topic." [:br] "My best skill is represented as 5 filled circles, and my worst marketable skill as 1 filled circle."]
-      [:div
-       [:h4 "Programming technologies"
-        [:span.tooltip {:data-tip true :data-for "visualization-explanation"} "?"]]
+    [tooltip {:id        "visualization-explanation"
+              :multiline true}
+     "Visualized as a relative scale - does not represent overall knowledge of the topic." [:br] "My best skill is represented as 5 filled circles, and my worst marketable skill as 1 filled circle."]
+    [:div
+     [:h4 "Programming technologies"
+      [:span.tooltip {:data-tip true :data-for "visualization-explanation"} "?"]]
 
-       [star-view "ClojureScript" 5]
-       [star-view "re-frame" 5 true]
-       [star-view "reagent" 5 true]
-       [star-view "Javascript" 5]
-       [star-view "React" 4 true]
-       [star-view "Redux" 3 true]
-       [star-view "CSS" 5]
-       [star-view "Sass" 4 true]
-       [star-view "HTML" 5]
-       [star-view "Git" 5]
-       [star-view "SQL/Postgres" 4]
-       [star-view "Python" 4]
-       [star-view "Django" 3 true]
-       [star-view "Scala" 3]
-       [star-view "Clojure" 3]
-       [:h4 "Other"]
-       [star-view "Software processes" 3]
-       [star-view "Photoshop" 3]
-       [star-view "Illustrator" 2]
-       [star-view "Sketch" 1]]]]))
+     [star-view "ClojureScript" 5]
+     [star-view "re-frame" 5 true]
+     [star-view "reagent" 5 true]
+     [star-view "Javascript" 5]
+     [star-view "React" 4 true]
+     [star-view "Redux" 3 true]
+     [star-view "CSS" 5]
+     [star-view "Sass" 4 true]
+     [star-view "HTML" 5]
+     [star-view "Git" 5]
+     [star-view "SQL/Postgres" 4]
+     [star-view "Python" 4]
+     [star-view "Django" 3 true]
+     [star-view "Excel" 4]
+     [star-view "Scala" 3]
+     [star-view "Clojure" 3]
+     [:h4 "Other"]
+     [star-view "Software processes" 3]
+     [star-view "Photoshop" 3]
+     [star-view "Illustrator" 2]
+     [star-view "Sketch" 1]]]])
+
+(defn get-text [text-or-fn]
+  (if (fn? text-or-fn)
+    (let [{:keys [full-time part-time]} @(re/subscribe [:taiste-months-working])]
+      (text-or-fn full-time part-time))                     ; bit ugly - only function is the months full time and part time
+    text-or-fn))
 
 (defn experience-listing [{:keys [title years subtitle text]}]
   [:div.row
    [:div.col-md-4
-    [:h3.mt-3.mb-2 (str title " ") [:i {:style {:font-size "1.25rem"}} years]]
+    [:h3.mt-3.mb-2 (str title " ") [:i {:style {:font-size "1.25rem"}} (get-text years)]]
     [:p.mt-0 [:i subtitle]]]
    [:div.col-md-8 text]])
 
@@ -126,10 +134,37 @@
    [:h1 "Education"]
    (map (fn [ed] ^{:key (:title ed)} [experience-listing ed]) (get-in texts/texts [:education]))])
 
-(def data-tilt-props
-  {"data-tilt-scale" 1.05
-   ;"data-tilt" true
-   "data-tilt-max"   2})
+
+(defn calculate-timeline-marker-pos [year]
+  (let [start 2012
+        end (-> (js/Date.)
+              (.getFullYear)
+              (- start))
+        pos (- year start)]
+    (str (-> (/ pos end)
+           (* 100)
+           (- 2)
+           ) "%")))
+
+(defn render-timeline-marker [{:keys [title years subtitle text]}]
+
+  [:div [:span [tooltip {:id        title
+                         :multiline true} text]]
+   [:div.marker.big {:data-tip true
+                     :data-for title
+                     :style {:position "absolute"
+                             :top      -12
+                             :left     (calculate-timeline-marker-pos title)}}
+    [:span {:style {:position "relative"
+                    :top      30
+                    :right    7}} title]]])
+
+(defn achievements []
+  [:section#achievements
+   [:h1.text-align-center "Academic achievements"]
+   [:i "Hover over the dots to view more information"]
+   [:div.achievements-timeline
+    (map render-timeline-marker (get-in texts/texts [:achievements]))]])
 
 (defn start-tilt []
   (.init vanilla-tilt (.querySelectorAll js/document ".portfolio-image")
