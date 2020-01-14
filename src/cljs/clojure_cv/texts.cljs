@@ -42,7 +42,7 @@
             :education        [{:text     [:span
                                            [:p "Information Networks is a trans-disciplinary study programme in engineering building on information and communication technology (ICT) and digital media. It combines the fields of social sciences, advanced digital technologies and business."]
                                            [:p "The programme builds on a vision where finding, defining and solving effectively relevant ICT and digital media related challenges is not possible without a holistic understanding about the interplay between technology, business and humans."]
-                                           [:p "I currently have completed 135 / 180 credits of the Bachelor's degree and have GPA of 4.41."]]
+                                           [:p "I currently have completed 170 / 180 credits of the Bachelor's degree and have GPA of 4.31."]]
                                 :title    "Master & Bachelor of Science in Technology"
                                 :years    "2017 - 2022"
                                 :subtitle "Information Networks, Aalto University"}
@@ -54,8 +54,13 @@
                                 :title    "Undergraduate"
                                 :years    "2013 - 2016"
                                 :subtitle "Kerttuli School of ICT"}]
-            :job-experience   [{:title    "Taiste Oy"
-                                :years    (fn [full-time part-time] [:span "1/2017 - present" [:br] full-time " mo. full-time, " part-time " mo. part-time"])
+            :job-experience   [{:title    "Vincit Oyj"
+                               :icon      "assets/vincit.jpg"
+                               :years    (fn [full-time part-time] [:span "1/2020 - present"]); [:br] full-time " mo. full-time, " part-time " mo. part-time"])
+                               :subtitle "Software Engineer"
+                               :text     [:p "Full stack software engineering with various clients and projects." ]}
+                                 {:title    "Taiste Oy"
+                                :years    (fn [full-time part-time] [:span "1/2017 - 1/2020"])
                                 :subtitle "Software Developer"
                                 :text     [:span [:p "Taiste builds mobile-driven digital solutions by combining customer insight, great UX and world-class technology expertise."]
                                            [:p "Clients I worked with include The Finnish Taxi Owners' Federation and Hesburger."]

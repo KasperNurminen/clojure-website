@@ -120,7 +120,7 @@
 
 (defn get-text [text-or-fn]
   (if (fn? text-or-fn)
-    (let [{:keys [full-time part-time]} @(re/subscribe [:taiste-months-working])]
+    (let [{:keys [full-time part-time]} @(re/subscribe [:vincit-months-working])]
       (text-or-fn full-time part-time))                     ; bit ugly - only function is the months full time and part time
     text-or-fn))
 

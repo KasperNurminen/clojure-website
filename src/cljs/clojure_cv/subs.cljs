@@ -21,11 +21,11 @@
                  )]
     (max 0 months)))
 
-(re/reg-sub :taiste-months-working
+(re/reg-sub :vincit-months-working
   (fn [_]
-    (let [start-date (js/Date. 2017 1 1)
-          summers-worked 2
-          extra-months 8
+    (let [start-date (js/Date. 2020 1 1)
+          summers-worked 0
+          extra-months 0
           month-diff (month-diff start-date (js/Date.))
           full-time (-> extra-months
                       (+ (* summers-worked 3)))]
