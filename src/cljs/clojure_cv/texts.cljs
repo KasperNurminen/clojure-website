@@ -2,34 +2,33 @@
   (:require [cljs-react-material-ui.icons :as ic]))
 
 (def texts {:main
-                              {:who-am-i  [:div
-                                           [:h1 "Who am I?"]
-                                           [:p "I am an energetic and curious university student and software developer from Finland on my way to become an expert in software engineering. Despite my 22 years of age, I already have a couple of years of experience in software development. I am currently completing my Bachelor's Degree and preparing for Master's Degree in Information Networks in Aalto-University."]
-                                           [:p "Jumping in at the deep end has always been my biggest strength - regardless of the task at hand, I jump straight at it and do whatever it takes to complete it. I am interested in how humans and computers interact (with a technical focus)."]
-                                           [:p "On my free time I often climb (mostly bouldering), go to the gym and play video games. I also enjoy volunteering at our student guild Athene, where I am currently the CTO (responsible for IT systems)."]]
-                               :education [{:title    "Master of Science in Technology (2020 - 2022)"
-                                            :subtitle "Information Networks, Aalto University"}
-                                           {:title    "Bachelor of Science in Technology (2017 - 2020)"
-                                            :subtitle "Information Networks, Aalto University"}
-                                           {:title    "Undergraduate (2013 - 2016)"
-                                            :subtitle "Kerttuli School of ICT"}]
-                               :interests [{:title    "Software Development"
-                                            :subtitle "Python, Javascript, ClojureScript, Scala"
-                                            :icon     ic/hardware-computer
-                                            }
-                                           {:title    "Software Development processes"
-                                            :subtitle "Agile, Waterfall, Scrum"
-                                            :icon     ic/action-group-work
-                                            }
-                                           {:title "Client interaction"
-                                            ;:subtitle "Requirements engineering"
-                                            :icon  ic/social-people
-                                            }]
+                              {:who-am-i            [:div
+                                                     [:h1 "Who am I?"]
+                                                     [:p "I am a full-stack software engineer experienced in a variety of SWE tasks. I am experienced in programming with various paradigms, (cloud) architecture, testing, CI/CD, containerization and microservices, agile methodologies (e.g scrum and kanban), and even some service and UX design."]
+                                                     [:p "I'm especially interested in making software for people, that is, using my skillset to deliver a finalized, polished experience for the users. I think that requires various skills from user-centric design to optimized software architecture."]
+                                                     [:p "On my free time I often climb (bouldering and rope climbing) and go to the gym. I also enjoy volunteering at our student guild Athene, where I used to be the CTO (responsible for IT systems)."]]
+                               :education           [{:title    "Master of Science in Technology (2020 - 2022)"
+                                                      :subtitle "Information Networks, Aalto University"}
+                                                     {:title    "Bachelor of Science in Technology (2017 - 2020)"
+                                                      :subtitle "Information Networks, Aalto University"}
+                                                     {:title    "Undergraduate (2013 - 2016)"
+                                                      :subtitle "Kerttuli School of ICT"}]
+                               :job-experience-list [{:title    "Vincit Oyj"
+                                                      :icon     "assets/vincit-avatar.jpg"
+                                                      :subtitle "Software Engineer"}
+                                                     {:title    "Taiste Oy"
+                                                      :subtitle "Software Developer"
+                                                      :icon     "assets/taiste-avatar.png"
+                                                      }
+                                                     {:title    "Aalto University"
+                                                      :subtitle "Course Assistant"
+                                                      :icon     "assets/aalto-avatar.jpg"
+                                                      }]
                                }
             :skills           [[:span
                                 [:h4 "Software Development"]
-                                [:p "My software development skillset includes a profiency with various programming languages and paradigms. I am confident with Python, Javascript, Scala and ClojureScript. My everyday work consists of using many common libraries and frameworks, such as React, Redux, Reagent, Re-frame and Django."]
-                                [:p "I am also familiar with writing tests, build automation, writing clean code and using Git. I know how to collaborate with peers and to maintain a big and complicated codebase."]
+                                [:p "My software development skillset includes a profiency with various programming languages and paradigms. I am confident with Python, Javascript, Java and ClojureScript. For a more detailed list, check the buzzword list on the right."]
+                                [:p "I am also familiar with writing tests, build automation, cloud architechture, writing clean code, and using Git. I know how to collaborate with peers and to maintain a big and complicated codebase."]
                                 [:p "I have knowledge of the most common workflows and processes about project management. I like to use agile methods in my development process, such as Scrum, Kanban and TDD."]]
                                [:span
                                 [:h4 "Other"]
@@ -42,9 +41,14 @@
             :education        [{:text     [:span
                                            [:p "Information Networks is a trans-disciplinary study programme in engineering building on information and communication technology (ICT) and digital media. It combines the fields of social sciences, advanced digital technologies and business."]
                                            [:p "The programme builds on a vision where finding, defining and solving effectively relevant ICT and digital media related challenges is not possible without a holistic understanding about the interplay between technology, business and humans."]
-                                           [:p "I currently have completed 170 / 180 credits of the Bachelor's degree and have GPA of 4.31."]]
-                                :title    "Master & Bachelor of Science in Technology"
+                                           [:p "My major is called Software Engineering & Architectures and I have computer science as a minor."]]
+                                :title    "Master of Science in Technology"
                                 :years    "2017 - 2022"
+                                :subtitle "Information Networks, Aalto University"}
+                               {:text     [:span
+                                           [:p "I finished my Bachelor's degree with a GPA of 4.3 (out of five). I minored in computer science."]]
+                                :title    "Bachelor of Science in Technology"
+                                :years    "2017 - 2020"
                                 :subtitle "Information Networks, Aalto University"}
                                {:text     [:span [:p "I completed 13 ECTS of basic computer science courses alongside my studies in Kerttuli, before I started at Aalto University."]]
                                 :title    "Separate study module (13 ECTS)"
@@ -55,27 +59,24 @@
                                 :years    "2013 - 2016"
                                 :subtitle "Kerttuli School of ICT"}]
             :job-experience   [{:title    "Vincit Oyj"
-                               :icon      "assets/vincit.jpg"
-                               :years    (fn [full-time part-time] [:span "1/2020 - present"]); [:br] full-time " mo. full-time, " part-time " mo. part-time"])
-                               :subtitle "Software Engineer"
-                               :text     [:p "Full stack software engineering with various clients and projects." ]}
-                                 {:title    "Taiste Oy"
+                                :icon     "assets/vincit.jpg"
+                                :years    (fn [full-time part-time] [:span "1/2020 - present"]) ; [:br] full-time " mo. full-time, " part-time " mo. part-time"])
+                                :subtitle "Software Engineer"
+                                :text     [:p "Full stack software engineering with various clients and projects."]}
+                               {:title    "Taiste Oy"
                                 :years    (fn [full-time part-time] [:span "1/2017 - 1/2020"])
                                 :subtitle "Software Developer"
                                 :text     [:span [:p "Taiste builds mobile-driven digital solutions by combining customer insight, great UX and world-class technology expertise."]
                                            [:p "Clients I worked with include The Finnish Taxi Owners' Federation and Hesburger."]
                                            [:p "My everyday job with Taiste consists of full-stack development with varying clients and diverse tasks, ranging from web- and backend technologies to build automation, deployment and testing."]]}
-                               {:title    "Lingsoft Oy"
-                                :years    "1⁄2017 - 12⁄2017"
-                                :subtitle "Transcriber"
-                                :text     [:span [:p "Litteration of records in Finnish and in English. Greatly increased my typing speed and English skills."]]
-                                }
-                               {:title    "Finnish Red Cross"
-                                :years    "7⁄2014 - 8⁄2015"
-                                :subtitle "F2F-fundraiser / F2F-teamleader"
-                                :text     [:span [:p "Spreading the word about the Red Cross and getting new monthly donators. A marketing gig where I later got promoted to a team leader. I was in charge of the F2F team of Turku."]]
+                               {:title    "Aalto University"
+                                :years    "1⁄2017 - 5⁄2017"
+                                :subtitle "Course Assistant"
+                                :text     [:span [:p "I was a course assistant for the course \"Verkkojulkaisemisen perusteet\" (Basics of web publishing). I taught freshmen the basics of HTML, CSS, Javascript, Photoshop and video editing."]]
                                 }]
-            :achievements     [{:title "2019"
+            :achievements     [{:title "2020"
+                                :text  "Finished my Bachelor's and received Aalto University School of Science Dean’s incentive-based scholarship for good progress in studies."}
+                               {:title "2019"
                                 :text  "Aalto University School of Science Dean’s incentive-based scholarship for good progress in studies."}
                                {:title "2018"
                                 :text  "Aalto University School of Science Dean’s incentive-based scholarship for good progress in studies."}

@@ -59,16 +59,17 @@
 
                 ) (:education texts))]]
        [:div.col-md-6
-        [:h3 "Top skills"]
+        [:h3 "Job experience"]
         [ui/list
          (map (fn [item]
                 ^{:key (:title item)}
                 [ui/list-item {:primary-text         (:title item)
                                :secondary-text       (:subtitle item)
                                :secondary-text-lines 2
-                               :on-click             (or (:on-click item) #(re/dispatch [:scroll-into-view "skills"]))
-                               :left-icon            ((:icon item))}])
-           (:interests (get-in texts/texts [:main])))]]]]]))
+                               :on-click             (or (:on-click item) #(re/dispatch [:scroll-into-view "job-experience"]))
+                               :left-avatar          (r/as-element [ui/avatar {:src (:icon item)}])
+                               }]
+                ) (:job-experience-list (get-in texts/texts [:main])))]]]]]))
 
 
 (defn star-view [name stars subsection?]
@@ -91,32 +92,23 @@
 
     [tooltip {:id        "visualization-explanation"
               :multiline true}
-     "Visualized as a relative scale - does not represent overall knowledge of the topic." [:br] "My best skill is represented as 5 filled circles, and my worst marketable skill as 1 filled circle."]
+     [:span "Below is a list of skills in no particular order. " [:br]
+      "Bolded entries are programming languages, " [:br]
+      "and the subsequent entries are frameworks " [:br]
+      "and libraries for that programming language."]]
     [:div
-     [:h4 "Programming technologies"
+     [:h4 "Buzzwords"
       [:span.tooltip {:data-tip true :data-for "visualization-explanation"} "?"]]
-
-     [star-view "ClojureScript" 5]
-     [star-view "re-frame" 5 true]
-     [star-view "reagent" 5 true]
-     [star-view "Javascript" 5]
-     [star-view "React" 4 true]
-     [star-view "Redux" 3 true]
-     [star-view "CSS" 5]
-     [star-view "Sass" 4 true]
-     [star-view "HTML" 5]
-     [star-view "Git" 5]
-     [star-view "SQL/Postgres" 4]
-     [star-view "Python" 4]
-     [star-view "Django" 3 true]
-     [star-view "Excel" 4]
-     [star-view "Scala" 3]
-     [star-view "Clojure" 3]
-     [:h4 "Other"]
-     [star-view "Software processes" 3]
-     [star-view "Photoshop" 3]
-     [star-view "Illustrator" 2]
-     [star-view "Sketch" 1]]]])
+     [:div {:style {:font-family "monospace" :font-size "13pt"}}
+      [:strong "Javascript:"] " React, Redux, Redux-Saga, Immutable.js, Three.js, Lodash, Ramda, d3, Leaflet, Cypress, Jest, Node, Express, Sequelize, Feathers"
+      [:br] [:strong "ClojureScript:"] " re-frame, reagent"
+      [:br] [:strong "SQL:"] " PostgreSQL, MySQL"
+      [:br] [:strong "Python:"] " Django, Flask, numpy, pandas, scikit-learn, Jupyter Notebook, pytest"
+      [:br] [:strong "AWS:"] " Elastic Beanstalk, EC2, RDS, S3, SNS, SQS, SES, Lambda, VPC, ELB, CloudFront, QuickSight"
+      [:br] [:strong "Java:"] " Java Spring"
+      [:br] [:strong "CSS:"] " Sass, styled-components, Bootstrap"
+      [:br] [:strong "Other:"] " Docker, Docker Compose, GitLab CI"]
+     ]]])
 
 (defn get-text [text-or-fn]
   (if (fn? text-or-fn)
