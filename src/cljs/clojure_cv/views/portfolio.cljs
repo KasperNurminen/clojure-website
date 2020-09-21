@@ -61,4 +61,15 @@
 (defn infodisplay []
   [render-portfolio-section :infodisplay])
 
+(defn gameservice []
+  [render-portfolio-section :gameservice])
+
+(defn asumistukilaskuri []
+  [render-portfolio-section :asumistukilaskuri])
+
+(defn ydinbook []
+  [render-portfolio-section :ydinbook])
+
+
+
 

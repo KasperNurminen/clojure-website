@@ -7,7 +7,7 @@
     [clojure-cv.events :as events]
     [clojure-cv.config :as config]
     [clojure-cv.views.core :refer [main-panel main-page ]]
-    [clojure-cv.views.portfolio :refer [ilmomasiina kaspernurminen oloscreen infodisplay]]
+    [clojure-cv.views.portfolio :refer [ilmomasiina kaspernurminen oloscreen infodisplay ydinbook gameservice asumistukilaskuri]]
     [secretary.core :as secretary :include-macros true]
     [accountant.core :as accountant]
     [goog.events :as goog-events]
@@ -43,6 +43,15 @@
 
 (secretary/defroute "/portfolio/infodisplay" []
   (reset! selected-page infodisplay))
+
+(secretary/defroute "/portfolio/asumistukilaskuri" []
+                    (reset! selected-page asumistukilaskuri))
+
+(secretary/defroute "/portfolio/gameservice" []
+                    (reset! selected-page gameservice))
+
+(secretary/defroute "/portfolio/ydinbook" []
+                    (reset! selected-page ydinbook))
 
 (defn hook-browser-navigation! []
   (doto (History.)

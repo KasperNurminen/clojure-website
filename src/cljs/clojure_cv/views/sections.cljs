@@ -29,7 +29,7 @@
         [:h2.title "Kasper Nurminen"]
         [:h3.title {:style {:color       "#AAAAAA"
                             :line-height "1.2rem"
-                            :font-size   "1.2rem"}} "Software Developer"]
+                            :font-size   "1.2rem"}} "Software Engineer"]
 
         [ui/icon-button {:class-name "contact-icon"
                          :href       "mailto:kasper.nurminen@aalto.fi"
@@ -99,7 +99,7 @@
     [:div
      [:h4 "Buzzwords"
       [:span.tooltip {:data-tip true :data-for "visualization-explanation"} "?"]]
-     [:div {:style {:font-family "monospace" :font-size "13pt"}}
+     [:div {:style {:font-family "monospace" :font-size "13pt" :line-height "1.4rem"}}
       [:strong "Javascript:"] " React, Redux, Redux-Saga, Immutable.js, Three.js, Lodash, Ramda, d3, Leaflet, Cypress, Jest, Node, Express, Sequelize, Feathers"
       [:br] [:strong "ClojureScript:"] " re-frame, reagent"
       [:br] [:strong "SQL:"] " PostgreSQL, MySQL"
@@ -190,7 +190,13 @@
                                :style    {:background-image "url(assets/oloscreen.webp)"
                                           :color            "white"}} [:h1 "Oloscreen"]]
         [:div.portfolio-image {:on-click #(re/dispatch [:navigate-to-portfolio-page :infodisplay])
-                               :style    {:background-image "url(assets/infodisplay.webp)"}} [:h1 "Infodisplay"]]]
+                               :style    {:background-image "url(assets/infodisplay.webp)"}} [:h1 "Infodisplay"]]
+        [:div.portfolio-image {:on-click #(re/dispatch [:navigate-to-portfolio-page :asumistukilaskuri])
+                               :style    {:background-image "url(assets/asumistukilaskuri.webp)"}} [:h1 "Asumistukilaskuri"]]
+        [:div.portfolio-image {:on-click #(re/dispatch [:navigate-to-portfolio-page :gameservice])
+                               :style    {:background-image "url(assets/gameservice.webp)"}} [:h1 "Game Service"]]
+        [:div.portfolio-image {:on-click #(re/dispatch [:navigate-to-portfolio-page :ydinbook])
+                               :style    {:background-image "url(assets/ydinbook.webp)"}} [:h1 "Ydinbook"]]]
        [:h2 {:style {:text-align "center"}} [:i "Commercial projects I have been involved with"]]
        [:div.d-flex.flex-wrap {:style {
                                        :margin-top "2rem"

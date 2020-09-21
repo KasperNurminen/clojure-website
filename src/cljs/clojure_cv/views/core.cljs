@@ -21,7 +21,7 @@
                        :style    {:text-align "left"}
                        :label    label})]))
 
-(def portfolio-pages #{"ilmomasiina" "kaspernurminenfi" "oloscreen" "infodisplay"})
+(def portfolio-pages #{"ilmomasiina" "kaspernurminenfi" "oloscreen" "infodisplay" "gameservice" "asumistukilaskuri" "ydinbook"})
 
 (defn menu-icons [menu-open]
   [:div.mr-2.menu-icons {:class-name (when menu-open "menu-icons-expanded")}
@@ -80,7 +80,7 @@
      [:div.main-image
       [:div.main-title
        [:h1 {:style {:text-align "center" :margin 0}} "Kasper Nurminen"]
-       [:h2 {:style {:text-align "center" :padding-top 0}} "Software Developer"]
+       [:h2 {:style {:text-align "center" :padding-top 0}} "Software Engineer"]
        [ui/floating-action-button {:mini     true
                                    :on-click #(re/dispatch [:scroll-into-view "main"])} [ic/hardware-keyboard-arrow-down {:style {:height "42px" }}]]]]
      [:div {:style {:position "relative"}} [:div.slanted-bar]]
